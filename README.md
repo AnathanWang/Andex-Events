@@ -119,18 +119,41 @@ alembic upgrade head
 
 ## 🗺 Настройка карт
 
-### Google Maps
-1. Получите API ключ в [Google Cloud Console](https://console.cloud.google.com/)
-2. Включите следующие API:
-   - Maps JavaScript API
-   - Places API
-   - Geocoding API
-3. Добавьте ключ в `.env` файл
+### Яндекс.Карты (основной провайдер)
+1. Получите API ключ в [Кабинете разработчика Яндекс](https://developer.tech.yandex.ru/)
+2. Подключите следующие сервисы:
+   - JavaScript API карт
+   - Геокодер API  
+   - Static API (для статичных изображений)
+3. Добавьте ключ в `.env` файл как `YANDEX_MAPS_API_KEY`
 
-### Для мобильного приложения
-Добавьте API ключ в соответствующие конфигурационные файлы:
-- `android/app/src/main/AndroidManifest.xml`
-- `ios/Runner/AppDelegate.swift`
+### Для мобильного приложения (Flutter)
+1. Добавьте API ключ в `android/app/src/main/AndroidManifest.xml`:
+```xml
+<meta-data
+    android:name="com.yandex.mapkit.ApiKey"
+    android:value="your_yandex_maps_api_key"/>
+```
+
+2. Для iOS в `ios/Runner/AppDelegate.swift`:
+```swift
+import YandexMapsMobile
+
+@UIApplicationMain
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    YMKMapKit.setApiKey("your_yandex_maps_api_key")
+    GeneratedPluginRegistrant.register(with: self)
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+}
+```
+
+### Дополнительные провайдеры карт
+Проект также поддерживает Google Maps и MapBox в качестве альтернативы.
 
 ## 📱 Функциональность
 

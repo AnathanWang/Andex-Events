@@ -23,7 +23,8 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379"
     
     # Maps API
-    GOOGLE_MAPS_API_KEY: str = ""
+    YANDEX_MAPS_API_KEY: str = ""
+    GOOGLE_MAPS_API_KEY: str = ""  # Оставляем для совместимости
     MAPBOX_API_KEY: str = ""
     
     # Email (for notifications)
